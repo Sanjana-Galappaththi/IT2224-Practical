@@ -1,0 +1,245 @@
+login as: 2021ict112
+2021ict112@172.16.140.150's password:
+Last login: Mon Mar 24 11:48:27 2025 from 172.16.140.69
+
+::Create file avc.csv 
+::csv => Comma separate value
+[2021ict112@fedora ~]$ touch avc.csv
+[2021ict112@fedora ~]$ vi avc.csv
+ID,Name,Salary,Department
+101,Alice,0,70000,Data Science
+102,Bob,25,50000,Engineering
+103,Charlie,5,80000,Data Science
+104,David,40,90000,HR
+105,Eve,28,60000,Engineering
+106,Frank,38,75000,HR
+107,Grace,27,72000,Data Science
+108,Hank,32,68000,Engineering
+109,Ivy,29,62000,Data Science
+110,Jack,38,71000,HR
+
+::Search the "Engineering" rows 
+::grep => A command line utility that searches for lines matching a pattern (text) in a file.
+[2021ict112@fedora ~]$ grep 'Engineering' avc.csv
+102,Bob,25,50000,Engineering
+105,Eve,28,60000,Engineering
+108,Hank,32,68000,Engineering
+
+::Find the first 5 rows
+::head => A command that displays the first lines of a file
+::-5  => A flag telling head to show the first 5 lines of the file
+[2021ict112@fedora ~]$ head -5 avc.csv
+ID,Name,Salary,Department
+101,Alice,0,70000,Data Science
+102,Bob,25,50000,Engineering
+103,Charlie,5,80000,Data Science
+104,David,40,90000,HR
+
+
+::Find the last 3 rows
+::tail => A command that shows the last lines of a file
+::-3 => A flag telling tail to display the last 3 lines.
+[2021ict112@fedora ~]$ tail -3 avc.csv
+108,Hank,32,68000,Engineering
+109,Ivy,29,62000,Data Science
+110,Jack,38,71000,HR
+
+::Display the all data
+::more => A pager command that displays the contents of a file one screen at a time.
+[2021ict112@fedora ~]$ more avc.csv
+ID,Name,Salary,Department
+101,Alice,0,70000,Data Science
+102,Bob,25,50000,Engineering
+103,Charlie,5,80000,Data Science
+104,David,40,90000,HR
+105,Eve,28,60000,Engineering
+106,Frank,38,75000,HR
+107,Grace,27,72000,Data Science
+108,Hank,32,68000,Engineering
+109,Ivy,29,62000,Data Science
+110,Jack,38,71000,HR
+
+
+::Find the 3rd Column 
+::awk=> A powerful text-processing tool used to manipulate and analyze structured data
+::-f => Sets the field separator to a comma
+::$ => An awk action: print the third field (column) from each line.
+[2021ict112@fedora ~]$ awk -F, '{print $3}' avc.csv
+Salary
+0
+25
+5
+40
+28
+38
+27
+32
+29
+38
+
+::Find the 3rd column
+::-d=> Sets the delimiter to a comma
+::cut=> A command used to extract specific fields or columns from each line of a file.
+::-f3 => Tells cut to extract the 3rd field (column) only
+[2021ict112@fedora ~]$ cut -d, -f3 avc.csv
+Salary
+0
+25
+5
+40
+28
+38
+27
+32
+29
+38
+
+
+::Find the 3rd row 
+:: head -n3 => The head command with the -n3 option shows the first 3 lines of avc.csv
+:: tail -n1 => The tail command with the -n1 option shows the last line of the input passed to it (in this case, the output from head).
+[2021ict112@fedora ~]$ head -n3 avc.csv | tail -n1
+102,Bob,25,50000,Engineering
+
+::A command used to display a message or the value of a variable in the terminal.
+::A special environment variable that stores the current width of the terminal window.
+[2021ict112@fedora ~]$ echo $COLUMNS
+117
+[2021ict112@fedora ~]$ vi avc.csv
+::cut => A command used to extract specific fields or columns from each line of a file.
+[2021ict112@fedora ~]$ cut -d, -f4 avc.csv
+Salary
+70000
+50000
+80000
+90000
+60000
+75000
+72000
+68000
+62000
+71000
+
+[2021ict112@fedora ~]$ awk -F, '{print $2, $3}' avc.csv
+Name Age
+Alice 0
+Bob 25
+Charlie 5
+David 40
+Eve 28
+Frank 38
+Grace 27
+Hank 32
+Ivy 29
+Jack 38
+
+::Find the salary with reverse order
+[2021ict112@fedora ~]$ awk -F, '{print $4}' avc.csv | sort
+50000
+60000
+62000
+68000
+70000
+71000
+72000
+75000
+80000
+90000
+Salary
+
+
+::n => Alphabetically order
+::sort =>	A command used to sort the lines of a file in a specific order.
+::-t','	=> Specifies the delimiter to be a comma
+::-k4,4 =>	Tells sort to sort based on the 4th field only.
+[2021ict112@fedora ~]$ sort -t',' -k4,4n avc.csv
+ID,Name,Age,Salary,Department
+102,Bob,25,50000,Engineering
+105,Eve,28,60000,Engineering
+109,Ivy,29,62000,Data Science
+108,Hank,32,68000,Engineering
+101,Alice,0,70000,Data Science
+110,Jack,38,71000,HR
+107,Grace,27,72000,Data Science
+106,Frank,38,75000,HR
+103,Charlie,5,80000,Data Science
+104,David,40,90000,HR
+
+
+:: 4nr => Sorts based on the 4th field only
+:: -n => Specifies numerical sorting 
+[2021ict112@fedora ~]$ sort -t',' -k4,4nr avc.csv
+104,David,40,90000,HR
+103,Charlie,5,80000,Data Science
+106,Frank,38,75000,HR
+107,Grace,27,72000,Data Science
+110,Jack,38,71000,HR
+101,Alice,0,70000,Data Science
+108,Hank,32,68000,Engineering
+109,Ivy,29,62000,Data Science
+105,Eve,28,60000,Engineering
+102,Bob,25,50000,Engineering
+ID,Name,Age,Salary,Department
+
+
+
+[2021ict112@fedora ~]$ sort -t',' -k3,3nr avc.csv
+104,David,40,90000,HR
+106,Frank,38,75000,HR
+110,Jack,38,71000,HR
+108,Hank,32,68000,Engineering
+109,Ivy,29,62000,Data Science
+105,Eve,28,60000,Engineering
+107,Grace,27,72000,Data Science
+102,Bob,25,50000,Engineering
+103,Charlie,5,80000,Data Science
+101,Alice,0,70000,Data Science
+
+
+
+[2021ict112@fedora ~]$ sort -t',' -k3,3n avc.csv
+101,Alice,0,70000,Data Science
+ID,Name,Age,Salary,Department
+103,Charlie,5,80000,Data Science
+102,Bob,25,50000,Engineering
+107,Grace,27,72000,Data Science
+105,Eve,28,60000,Engineering
+109,Ivy,29,62000,Data Science
+108,Hank,32,68000,Engineering
+106,Frank,38,75000,HR
+110,Jack,38,71000,HR
+104,David,40,90000,HR
+
+
+[2021ict112@fedora ~]$ sort -t',' -k4,4 -r avc.csv
+ID,Name,Age,Salary,Department
+104,David,40,90000,HR
+103,Charlie,5,80000,Data Science
+106,Frank,38,75000,HR
+107,Grace,27,72000,Data Science
+110,Jack,38,71000,HR
+101,Alice,0,70000,Data Science
+108,Hank,32,68000,Engineering
+109,Ivy,29,62000,Data Science
+105,Eve,28,60000,Engineering
+102,Bob,25,50000,Engineering
+[2021ict112@fedora ~]$
+
+
+[2021ict112@fedora ~]$ sort -t',' -k2,2 -r avc.csv | sort -t',' -k4,4 -r avc.csv
+ID,Name,Age,Salary,Department
+104,David,40,90000,HR
+103,Charlie,5,80000,Data Science
+106,Frank,38,75000,HR
+107,Grace,27,72000,Data Science
+110,Jack,38,71000,HR
+101,Alice,0,70000,Data Science
+108,Hank,32,68000,Engineering
+109,Ivy,29,62000,Data Science
+105,Eve,28,60000,Engineering
+102,Bob,25,50000,Engineering
+
+
+
+
+
