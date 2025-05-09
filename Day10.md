@@ -1,4 +1,7 @@
 1st Practical Ica
+
+Question: Find GCD and LCM
+
 <img width="709" alt="2" src="https://github.com/user-attachments/assets/1bfa9e19-2fda-4552-a4ff-d633938e759d" />
 
 
