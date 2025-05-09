@@ -1,0 +1,166 @@
+Example01:
+Print multiplication table using for loop
+
+ 1 x 2 = 2
+ 2 x 2 = 4
+ .......
+
+code:
+[2021ict112@fedora ~]$ touch day09.sh
+[2021ict112@fedora ~]$ vi day09.sh
+
+for((i=1; i<=12; i++))
+do
+ mul=$(($i*2))
+echo $i " x 2 = " $mul
+done
+
+[2021ict112@fedora ~]$ chmod 777 day09.sh
+[2021ict112@fedora ~]$ ./day09.sh
+1  x 2 =  2
+2  x 2 =  4
+3  x 2 =  6
+4  x 2 =  8
+5  x 2 =  10
+6  x 2 =  12
+7  x 2 =  14
+8  x 2 =  16
+9  x 2 =  18
+10  x 2 =  20
+11  x 2 =  22
+12  x 2 =  24
+
+
+######################################################################
+Example02:
+
+          *
+		 ***
+		*****
+	   *******
+	  *********
+	   *******
+	    *****
+		 ***
+		  *
+
+code: 
+[2021ict112@fedora ~]$ vi d9ex2.sh
+#Top half of the diamond
+rows=5
+for((i=1; i<=rows; i++))
+do
+for((j=i; j<rows; j++))
+do
+echo -n " "
+done
+for(( k=1; k<=(2*i-1); k++))
+do
+echo -n "*"
+done
+echo
+done
+
+#bottom half 
+for((i=rows-1; i>=1; i--))
+do
+for((j=rows; j>i; j--))
+do
+echo -n " "
+done
+for((k=1; k<=(2*i-1); k++))
+do
+echo -n "*"
+done
+echo
+done
+  
+[2021ict112@fedora ~]$ ./d9ex2.sh
+Enter number of rows:
+5
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+
+
+
+    * * * * *
+	*       *
+	*       *
+	*       *
+	*       *
+	*       *
+	*       *
+	*********
+	
+	
+for((i=1; i<=5; i++))
+do
+echo "*"
+done
+for((j=i
+
+
+Example03: Fibonacci Series
+0 1 1 2 3 13 21 34
+Sum of the first 10 fibonacci numbers:88
+
+echo "Enter number"
+read num
+sum=0
+a=0
+b=1
+echo $a
+echo $b
+for((i=0; i<num; i++))
+do
+c=$(($a+$b))
+a=$b
+b=$c
+sum=$(($sum+$c))
+echo $c
+
+done
+echo "Summation is:" $sum
+
+
+
+
+
+
+
+Example04: Sum of prime numbers between 1 and 100 is: 1060
+
+sum=0
+
+is_prime() {
+    n=$1
+    if (( n <= 1 )); then
+        return 1
+    fi
+    for ((i=2; i*i<=n; i++)); do
+        if (( n % i == 0 )); then
+            return 1
+        fi
+    done
+    return 0
+}
+
+for ((i=1; i<=100; i++)); do
+    if is_prime $i; then
+        sum=$((sum + i))
+    fi
+done
+
+echo "Sum of prime numbers between 1 and 100 is: $sum"
+
+
+
+
+
