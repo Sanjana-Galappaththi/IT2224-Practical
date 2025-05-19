@@ -1,0 +1,488 @@
+//if else
+	if(condition)
+	{
+		//body of if statment
+	}
+	else
+	{
+		//body of else statment
+	}
+	
+//Example 01: Enter your age and verify your eligible or not for election voting using if else condition
+
+[2021ict112@fedora ~]$ touch Day13.c
+[2021ict112@fedora ~]$ vi Day13.c
+
+#include<stdio.h>
+int main()
+{
+	int age;
+	printf("Enter Your age:");
+	scanf("%d", &age);
+	
+	if(age>=18)
+	{
+		printf("You are  eligible for voting");
+		printf("\n");
+	}
+	else
+	{
+		printf("You are not eligible for voting");
+		printf("\n");
+	}
+	
+	return 0;
+}
+
+[2021ict112@fedora ~]$ gcc Day13.c -o Day13
+[2021ict112@fedora ~]$ ./Day13
+Enter Your age:24
+You are  eligible for voting
+
+//Example 02:
+############### Ternary operator
+test_condition ? expression1 : expression2;
+
+
+[2021ict112@fedora ~]$ touch ex2.c
+[2021ict112@fedora ~]$ vi ex2.c
+
+#include<stdio.h>
+int main()
+{
+	int age;
+	printf("Enter Your age:");
+	scanf("%d", &age);
+	
+	(age>=18)? printf("You are eligible for voting!"): printf("You are No eligible for voting!");
+	
+	return 0;
+}
+
+
+[2021ict112@fedora ~]$ gcc ex2.c -o ex2
+[2021ict112@fedora ~]$ ./ex2
+Enter Your age:24
+You are eligible for voting![2021ict112@fedora ~]$ ./ex2
+Enter Your age:17
+You are No eligible for voting![
+
+
+//Example 03:
+####################switch operator
+switch(variable/expression)
+{
+	case 1:
+	//body of case 1
+	break;
+	
+	case 2:
+	//body of case 2
+	break;
+	.
+	.
+	.
+	defualt :
+	//body of the default
+
+}
+
+Enter the value between 1 to 7 and create a program for following output:
+
+Enter the number between 1 to 7 : 1
+Today is Sunday 
+
+
+
+[2021ict112@fedora ~]$ vi ex3.c
+#include<stdio.h>
+int main()
+{
+	int number;
+	printf("Enter the number between 1 to 7 :");
+	scanf("%d" , &number);
+	
+	switch(number)
+	{
+		case 1 :
+		printf("\nToday is Sunday\n");
+		break;
+		
+		case 2 :
+		printf("\nToday is Monday\n");
+		break;
+		
+		case 3 :
+		printf("\nToday is Tuesday\n");
+		break;
+
+        case 4 :
+		printf("\nToday is Wednesday\n");
+		break;
+
+        case 5 :
+		printf("\nToday is Thursday\n");
+		break;
+		
+		case 6 :
+		printf("\nToday is Friday\n");
+		break;
+		
+		case 7 :
+		printf("\nToday is Saturday\n");
+		break;
+		
+		default :
+		printf("\nInvalid input\n");
+		break;
+	}
+	
+	return 0;
+}
+[2021ict112@fedora ~]$ gcc ex3.c -o ex3
+[2021ict112@fedora ~]$ ./ex3
+Enter the number between 1 to 7 :5
+Today is Thursday[2021ict112@fedora ~]$ vi ex3.c
+[2021ict112@fedora ~]$ gcc ex3.c -o ex3
+[2021ict112@fedora ~]$ ./ex3
+output:
+Enter the number between 1 to 7 :5
+
+Today is Thursday
+
+//Example 04:
+
+Write a code for small astrology based on your life path number for that get date of from user then calculate life path number.(use switch case)
+  
+  Date:23
+  
+  calculation for life path number:
+   a=date%10   3
+   b=date/10   2
+   c=a+b       5
+   if life path number :
+   1:Lucky
+   2:Carefuly do your work
+   3:Stronger
+   4:Happy 
+   5:Can get help
+   6:Doubt
+   7:Sad
+   8:Like
+   9:Courage
+   
+
+[2021ict112@fedora ~]$ vi ex4.c
+ 
+ #include<stdio.h>
+ int main()
+ {
+	 int a;
+     int b;
+	 int c;
+	 int Date;
+	 
+	 printf("Enter a Date :\n");
+	 scanf("%d",&Date); 
+	 a=date%10;
+	 b=date/10;
+     c=a+b;
+	 
+	 switch(c)
+	 {
+		 case 1:
+		 printf("Lucky\n");
+		 break;
+		 
+		 case 2:
+		 printf("Carefuly do your work\n");
+		 break;
+		 
+		 case 3:
+		 printf("Stronger\n");
+		 break;
+		 
+		 
+		 case 4:
+		 printf("Happy\n");
+		 break;
+		 
+		 
+		 case 5:
+		 printf("Can get help\n");
+		 break;
+		 
+		 
+		 case 6:
+		 printf("Doubt\n");
+		 break;
+		 
+		 
+		 case 7:
+		 printf("Sad\n");
+		 break;
+		 
+		 
+		case 8:
+		 printf("Like\n");
+		 break;
+		 
+		 case 9:
+		 printf("Courage\n");
+		 break;
+		 
+		 default :
+		 printf("Invalid input\n");
+		 break;
+	 }
+	 return 0;
+ }
+ 
+[2021ict112@fedora ~]$ gcc ex4.c -o ex4
+[2021ict112@fedora ~]$ ./ex4
+Enter a Date :
+17
+Like
+
+ 
+//Example 05:
+Give list of number then calculate the summation and multiplication using for loop.
+   ex: 1 2 3 4 5
+   summation = 15
+   multiplication =120
+ 
+[2021ict112@fedora ~]$ touch ex5.c
+[2021ict112@fedora ~]$ vi ex5.c
+
+#include <stdio.h>
+
+int main() {
+    int numbers[] = {1, 2, 3, 4, 5};  
+    int size = sizeof(numbers) / sizeof(numbers[0]); 
+    int summation = 0;
+    int multiplication = 1;
+
+   
+    for (int i = 0; i < size; i++) {
+        summation += numbers[i];
+        multiplication *= numbers[i];
+    }
+
+   
+    printf("Summation = %d\n", summation);
+    printf("Multiplication = %d\n", multiplication);
+
+    return 0;
+}
+[2021ict112@fedora ~]$ gcc ex5.c -o ex5
+[2021ict112@fedora ~]$ ./ex5
+Summation = 15
+Multiplication = 120
+ 
+   
+
+
+
+
+   
+//Example 06:
+print the integers from 1 to 10 using while loop.
+
+
+[2021ict112@fedora ~]$ touch ex6.c
+[2021ict112@fedora ~]$ vi ex6.c
+#include <stdio.h>
+
+int main() {
+    int i = 1; 
+
+   
+    while (i <= 10) {
+        printf("%d\n", i);
+        i++; 
+    }
+
+    return 0;
+}
+
+[2021ict112@fedora ~]$ gcc ex6.c -o ex6
+[2021ict112@fedora ~]$ ./ex6
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+
+
+
+
+
+//Example 07:
+write a C programme to generate and print the Fibonacci series up to specified number of terms. the program should take the  number of terms as input from the user and then display the corresponding Fibanacci sequence,
+
+[2021ict112@fedora ~]$ touch ex7.c
+[2021ict112@fedora ~]$ vi ex7.c
+
+	
+	#include <stdio.h>
+    int main() {
+    int n, a = 0, b = 1, nextTerm;
+
+    printf("Enter the number of terms: ");
+    scanf("%d", &n);
+
+    printf("Fibonacci Series: %d, %d, ", a, b);
+
+    
+    for (int i = 3; i <= n; ++i) {
+        nextTerm = a + b ;
+        printf("%d, ", nextTerm);
+        a = b;
+        b = nextTerm;
+    }
+
+    return 0;
+}
+
+[2021ict112@fedora ~]$ gcc ex7.c -o ex7
+[2021ict112@fedora ~]$ ./ex7
+Enter the number of terms: 5
+Fibonacci Series: 0, 1, 1, 2, 3,
+   
+
+
+
+
+//Example 08:
+write a C program to calculate the factorial of given non given integer.
+
+
+[2021ict112@fedora ~]$ touch ex8.c
+[2021ict112@fedora ~]$ vi ex8.c
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    unsigned long long fact = 1;
+
+    printf("Enter an integer: \n");
+    scanf("%d", &n);
+
+    if (n < 0)
+        printf("Error! Factorial of a negative number doesn't exist.\n");
+    else {
+        for (i = 1; i <= n; ++i) {
+            fact *= i;
+        }
+        printf("Factorial of %d = %llu\n", n, fact);
+    }
+
+    return 0;
+	printf("\n");
+}
+
+
+
+[2021ict112@fedora ~]$ gcc ex8.c -o ex8
+[2021ict112@fedora ~]$ ./ex8
+Enter an integer:
+-5
+Error! Factorial of a negative number doesn't exist.
+[2021ict112@fedora ~]$ ./ex8
+Enter an integer:
+6
+Factorial of 6 = 720
+
+
+
+
+//Example 09:
+Write a C programme that:
+Accepts two strings as input from the user.
+Concatenates the two strings Displays the Concatenated result
+
+[2021ict112@fedora ~]$ touch ex9.c
+[2021ict112@fedora ~]$ vi ex9.c
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str1[100], str2[100], result[200];
+
+    
+    printf("Enter first string: ");
+    fgets(str1, sizeof(str1), stdin);
+    
+    printf("Enter second string: ");
+    fgets(str2, sizeof(str2), stdin);
+
+    
+    str1[strcspn(str1, "\n")] = 0;
+    str2[strcspn(str2, "\n")] = 0;
+
+   
+    strcpy(result, str1);
+    strcat(result, str2);
+
+   
+    printf("Concatenated string: %s\n", result);
+
+    return 0;
+}
+
+
+[2021ict112@fedora ~]$ gcc ex9.c -o ex9
+[2021ict112@fedora ~]$ ./ex9
+Enter first string: sanjana
+Enter second string: nishagee
+Concatenated string: sanjananishagee
+
+
+
+
+
+//Example 10:
+Write a C program that takes a binary number (as an integer) as input and converts it to its decimal equivalent.
+
+[2021ict112@fedora ~]$ touch ex10.c
+[2021ict112@fedora ~]$ vi ex10.c
+#include <stdio.h>
+
+int binaryToDecimal(int n) {
+    int decimal = 0, base = 1, last_digit;
+
+    while (n > 0) {
+        last_digit = n % 10;
+        decimal += last_digit * base;
+        base *= 2;
+        n /= 10;
+    }
+
+    return decimal;
+}
+
+int main() {
+    int binary;
+    
+    printf("Enter a binary number: ");
+    scanf("%d", &binary);
+    
+    printf("Decimal equivalent: %d\n", binaryToDecimal(binary));
+    
+    return 0;
+}
+
+[2021ict112@fedora ~]$ gcc ex10.c -o ex10
+[2021ict112@fedora ~]$ ./ex10
+Enter a binary number: 10010
+Decimal equivalent: 18
+
+
+
