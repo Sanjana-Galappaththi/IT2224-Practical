@@ -1,0 +1,104 @@
+//Example01:
+//get processing id of parent (A)
+//get child parent_id (B and C)
+//get a child of parent B
+// B - fibonnacci  
+// C - prime numbers
+
+//int A, B, C (Global Variable)
+//int main() { int x,y,x (local variable)}
+
+
+
+#include <stdio.h>
+#include <unistd.h>
+
+int is_prime(int num) {
+    if (num < 2) return 0;
+    for (int i = 2; i * i <= num; i++)
+        if (num % i == 0) return 0;
+    return 1;
+	
+}
+
+int main()
+{ 
+    
+
+
+    int num1;
+    int num2;
+    int	num3;
+    printf("Enter three numbers: ");
+    scanf("%d %d %d", &num1, &num2, &num3);
+	
+	int f=fork();
+    if (f == 0) 
+	{  
+        int fact = 1;
+        for (int i = 1; i<=num1; i++) 
+		{
+		
+	    fact *= i;
+		}
+        printf("Factorial :%d\n", fact);
+		
+	}
+	else 
+	{
+		int f1=fork();
+		if(f1==0)
+		{
+			int a = 0;
+            int b = 1;
+            int c;
+            printf("Fibonacci: ");
+            for (int i = 0; i < num2; i++) {
+                printf("%d ", a);
+                c = a + b;
+                a = b;
+                b = c;
+			}
+		}
+		
+		 else
+	    {  
+            printf("Primes up to %d: ", num3);
+            for (int i = 2; i <= num3; i++)
+                if (is_prime(i))
+				{printf("%d ", i);
+				}
+            printf("\n");
+        }
+	  return 0;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
