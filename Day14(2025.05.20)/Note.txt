@@ -1,0 +1,102 @@
+//Example 01:
+
+
+[2021ict112@fedora ~]$ touch Ex1.c
+[2021ict112@fedora ~]$ vi Ex1.c
+
+
+#include<stdio.h>
+#include<unistd.h>
+int main()
+{
+  printf("\nHello World!");
+  int f=fork();
+  int p=getpid();
+  
+  
+  printf("\n The pid is %d",p);
+  printf("\n The fork is %d",f);
+  printf("\n");
+  
+  return 0;
+}
+
+
+[2021ict112@fedora ~]$ gcc Ex1.c -o Ex1
+[2021ict112@fedora ~]$ ./Ex1
+
+Hello World!
+ The pid is 13944
+ The fork is 13945
+Hello World!
+ The pid is 13945
+ The fork is 0
+
+
+
+
+//Example 02:
+
+//child: I am Child
+//parent : I am Parent
+//both id
+
+
+#include<stdio.h>
+#include<unistd.h>
+int main()
+{
+ 
+    int f=fork();
+	 if (f==0)
+  {
+	  printf("\nI am Child ");
+  }
+  
+  else
+  {
+	  printf("\nI am Parent");
+  }
+  
+  
+  printf("\n");
+  
+  return 0;
+}
+
+
+//Example 03:
+
+#include<stdio.h>
+#include<unistd.h>
+int main()
+{
+	int p = getpid();
+	int f=fork();
+	if(f==0)
+	{
+      printf("I'm child");
+	  printf("My parent ID: %d\n",getppid());
+	}
+	else
+	{
+		int f1=fork();
+		if(f1==0)
+		{
+		   printf("I'm sibling.");
+           printf("My parent ID: %d\n",getppid());	
+		}
+		else
+		{
+			printf("I'm parent.");
+			printf("My ID:%d ,",getppid());
+			printf("My parent ID:is %d\n",getppid());
+		}
+	}
+  return 0;
+}	
+
+
+
+
+
