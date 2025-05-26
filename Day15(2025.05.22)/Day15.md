@@ -1,15 +1,17 @@
-# IT2234-Practicals
+Question 01:
 
-01.Print "Hello World!"
+![Q1](https://github.com/user-attachments/assets/2b9ff969-36bf-4e97-ad31-ee36db32578b)
 
-![Note1](https://github.com/user-attachments/assets/b9b38168-5aea-482a-80df-cba65d641521)
+Question 02:
 
-
-02.Arithmetic Operations
-
-![Note2](https://github.com/user-attachments/assets/8a9c8410-cd71-4e63-ac97-33dfc1f8ab76)
+![Q2](https://github.com/user-attachments/assets/8caf25c2-b593-4e6f-8e5b-d78bb0559987)
 
 
-03.Loops
+Question 03:
 
-![Note3](https://github.com/user-attachments/assets/95db8003-e091-4f5b-9e37-d463d21925a6)
+![Q3](https://github.com/user-attachments/assets/9bcf1f3c-d434-4a5d-9811-a3738b28646b)
+
+
+Question 04:
+
+![Q4](https://github.com/user-attachments/assets/cc64958b-eb89-4a3c-864d-0b285f6601bb)
