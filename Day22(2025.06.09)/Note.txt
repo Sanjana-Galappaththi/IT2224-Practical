@@ -1,0 +1,129 @@
+//Question 01:
+
+ step01: parent process get input from user
+ step02: sending these inputs to child process
+ step03: child process getting these inputs from parent and doing calculation
+ step04: step the calculated values to parent
+ step05: parent print the outputs
+ 
+ [circle,rectangle,triangle,square]
+ 
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+void calculate_area(char shape, double a, double b, double *area) {
+    switch (shape) {
+        case 'C': // Circle
+            *area = 3.14159 * a * a;
+            break;
+        case 'T': // Triangle
+            *area = 0.5 * a * b;
+            break;
+        case 'S': // Square
+            *area = a * a;
+            break;
+        case 'R': // Rectangle
+            *area = a * b;
+            break;
+        default:
+            *area = -1; // Invalid shape
+    }
+}
+
+int main() {
+    int pipe1[2]; // Parent to Child
+    int pipe2[2]; // Child to Parent
+
+    if (pipe(pipe1) == -1 || pipe(pipe2) == -1) {
+        perror("Pipe creation failed");
+        return 1;
+    }
+
+    pid_t pid = fork();
+
+    if (pid < 0) {
+        perror("Fork failed");
+        return 1;
+    }
+
+    if (pid > 0) { // Parent Process
+        close(pipe1[0]); // Close read end of pipe1
+        close(pipe2[1]); // Close write end of pipe2
+
+        char shape;
+        double a, b = 0, area;
+
+        // Step 1: Get input from user
+        printf("Enter shape (C: Circle, T: Triangle, S: Square, R: Rectangle): ");
+        scanf(" %c", &shape);
+        printf("Enter dimensions: ");
+        if (shape == 'C' || shape == 'S')
+            scanf("%lf", &a);
+        else
+            scanf("%lf %lf", &a, &b);
+
+        // Step 2: Send inputs to child process
+        write(pipe1[1], &shape, sizeof(shape));
+        write(pipe1[1], &a, sizeof(a));
+        write(pipe1[1], &b, sizeof(b));
+        close(pipe1[1]); // Done writing
+
+        // Step 3: Wait and read result from child
+        wait(NULL); // Wait for child to finish
+        read(pipe2[0], &area, sizeof(area));
+        close(pipe2[0]);
+
+        // Step 4: Print result
+        if (area >= 0)
+            printf("Calculated Area: %.2f\n", area);
+        else
+            printf("Invalid shape!\n");
+    } else { // Child Process
+        close(pipe1[1]); // Close write end of pipe1
+        close(pipe2[0]); // Close read end of pipe2
+
+        char shape;
+        double a, b, area;
+
+        // Step 1: Read inputs from parent
+        read(pipe1[0], &shape, sizeof(shape));
+        read(pipe1[0], &a, sizeof(a));
+        read(pipe1[0], &b, sizeof(b));
+        close(pipe1[0]);
+
+        // Step 2: Calculate area
+        calculate_area(shape, a, b, &area);
+
+        // Step 3: Send result back to parent
+        write(pipe2[1], &area, sizeof(area));
+        close(pipe2[1]);
+
+        _exit(0);
+    }
+
+    return 0;
+}
+
+
+[2021ict112@fedora ~]$ vi homework.c
+[2021ict112@fedora ~]$ gcc homework.c -o homework
+[2021ict112@fedora ~]$ ./homework
+Enter shape (C: Circle, T: Triangle, S: Square, R: Rectangle): C
+Enter dimensions: 7
+Calculated Area: 153.94
+[2021ict112@fedora ~]$ ./homework
+Enter shape (C: Circle, T: Triangle, S: Square, R: Rectangle): T
+Enter dimensions: 5
+7
+Calculated Area: 17.50
+[2021ict112@fedora ~]$ ./homework
+Enter shape (C: Circle, T: Triangle, S: Square, R: Rectangle): S
+Enter dimensions: 2
+Calculated Area: 4.00
+[2021ict112@fedora ~]$ ./homework
+Enter shape (C: Circle, T: Triangle, S: Square, R: Rectangle): R
+Enter dimensions: 20
+15
+Calculated Area: 300.00
